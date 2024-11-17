@@ -6,4 +6,6 @@ const formData = require("express-form-data")
 // router.get("/init", Users.init)
 router.post("/login", formData.parse(), Users.login)
 
+router.post("/logout", Users.logout)
+
 module.exports = router;

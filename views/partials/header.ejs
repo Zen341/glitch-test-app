@@ -24,7 +24,7 @@
                                 <a class="dropdown-item disabled" href="#">
                                     <%= user?.username || "untitled" %>
                                 </a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="#" id="logout-link">Logout</a>
                             </div>
                         </li>
                         <% } %>
@@ -75,5 +75,22 @@
                 }
             });
         // });
+
+            document.getElementById("logout-link").addEventListener("click", (event) => {
+                event.preventDefault()
+
+                fetch("/api/users/logout", {
+                    method: "POST"
+                })
+                .then((res) => res.json())
+                .then((jsonData) => {
+                    if (jsonData?.result) {
+                        window.location.reload()
+                    }
+                })
+                .catch((error) => {
+                    console.log("🚀 ~ document.getElementById ~ error:", error?.message)
+                })
+            })
     </script>
 </header>
