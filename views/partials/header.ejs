@@ -1,4 +1,4 @@
-<header>
+<header class="sticky-top z-3">
     <script>
         const htmlElement = document.documentElement;
 
@@ -8,6 +8,10 @@
     </script>
     <nav id="navBarContainer" class="navbar navbar-expand-sm border-bottom border-body">
         <div class="container">
+            <button class="btn btn-secondary d-sm-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#Id2"
+                aria-controls="Id2">
+                Notes
+            </button>
             <a class="navbar-brand" href="/">Note App</a>
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
@@ -26,6 +30,9 @@
                                 </a>
                                 <a class="dropdown-item" href="#" id="logout-link">Logout</a>
                             </div>
+                        </li>
+                        <li class="nav-item d-none d-sm-block">
+                            <a class="nav-link" data-bs-toggle="offcanvas" aria-controls="Id2" href="#Id2">Notes</a>
                         </li>
                         <% } %>
                             <!-- <li class="nav-item">
@@ -62,26 +69,26 @@
     <script>
         // document.addEventListener('DOMContentLoaded', (event) => {
 
-            const switchElement = document.getElementById('darkModeSwitch');
-            switchElement.checked = currentTheme === 'dark';
+        const switchElement = document.getElementById('darkModeSwitch');
+        switchElement.checked = currentTheme === 'dark';
 
-            switchElement.addEventListener('change', function () {
-                if (this.checked) {
-                    htmlElement.setAttribute('data-bs-theme', 'dark');
-                    localStorage.setItem('bsTheme', 'dark');
-                } else {
-                    htmlElement.setAttribute('data-bs-theme', 'light');
-                    localStorage.setItem('bsTheme', 'light');
-                }
-            });
+        switchElement.addEventListener('change', function () {
+            if (this.checked) {
+                htmlElement.setAttribute('data-bs-theme', 'dark');
+                localStorage.setItem('bsTheme', 'dark');
+            } else {
+                htmlElement.setAttribute('data-bs-theme', 'light');
+                localStorage.setItem('bsTheme', 'light');
+            }
+        });
         // });
 
-            document.getElementById("logout-link").addEventListener("click", (event) => {
-                event.preventDefault()
+        document.getElementById("logout-link").addEventListener("click", (event) => {
+            event.preventDefault()
 
-                fetch("/api/users/logout", {
-                    method: "POST"
-                })
+            fetch("/api/users/logout", {
+                method: "POST"
+            })
                 .then((res) => res.json())
                 .then((jsonData) => {
                     if (jsonData?.result) {
@@ -91,6 +98,6 @@
                 .catch((error) => {
                     console.log("🚀 ~ document.getElementById ~ error:", error?.message)
                 })
-            })
+        })
     </script>
 </header>
