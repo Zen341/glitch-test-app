@@ -12,7 +12,7 @@ router.get('/', checkLogin, function (req, res, next) {
 
 router.get("/notes", checkLogin, (req, res, next) => {
   if (!req?.user) {
-    res.redirect("/notes")
+    res.redirect("/")
   }
   res.render("notes", {user: req?.user})
 })

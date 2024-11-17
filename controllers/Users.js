@@ -90,6 +90,23 @@ exports.login = async (req, res) => {
     }
 }
 
+exports.logout = async (req, res) => {
+    try {
+        res.clearCookie('token')
+        res.status(200).json({
+            result: true,
+            code: 200,
+            message: `logout`
+        })
+    } catch (error) {
+        res.status(200).json({
+            result: false,
+            code: 500,
+            message: `logout ${error?.message}`
+        })
+    }
+}
+
 exports.checkLogin = async (req, res, next) => {
     try {
         const token = req.signedCookies["token"]
