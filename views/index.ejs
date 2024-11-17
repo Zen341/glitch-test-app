@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p><%= time %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="d-flex flex-column vh-100">
+    <div id="liveAlertPlaceholder"></div>
+    <%- include("partials/header", {user}) %>
+      <!-- Landing Page Content -->
+      <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <div class="text-center">
+          <h1 class="display-4">Welcome to <%= title %>!</h1>
+          <!-- <p class="lead">You're not login.</p> -->
+          <p class="fst-italic">
+            <%= time %>
+          </p>
+          <form id="form-login" class="text-start p-5 border rounded">
+            <div class="mb-3">
+              <label for="form-login-username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="userName" id="form-login-username"
+                placeholder="" />
+            </div>
+            <div class="mb-3">
+              <label for="form-login-password" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" id="form-login-password"
+                placeholder="" />
+            </div>
+            <div class="w-100 text-center">
+              <button type="submit" class="btn btn-primary">
+                Login
+              </button>
+            </div>
+          </form>
+          <!-- <a href="#" class="btn btn-primary btn-lg">Get Started</a> -->
+        </div>
+      </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="/javascripts/global-after.js"></script>
+</body>
+<script>
+  document.getElementById("form-login").addEventListener("submit", (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.target)
+    fetch("/api/users/login", {
+      method: "POST",
+      body: formData
+    })
+    .then((res) => res.json())
+    .then((jsonData) => {
+      alert(jsonData?.message)
+      if (jsonData?.result) {
+        window.location.reload()
+      }
+    })
+    .catch((error) => {
+      console.log("🚀 ~ document.getElementById ~ error:", error?.message)
+      alert("Something went wrong!")
+    })
+  })
+</script>
 </html>

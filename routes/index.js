@@ -1,9 +1,20 @@
 var express = require('express');
 var router = express.Router();
+const { checkLogin } = require("../controllers/Users")
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', time: (new Date()).toLocaleString() });
+router.get('/', checkLogin, function (req, res, next) {
+  if (req?.user) {
+    res.redirect("/notes")
+  }
+  res.render('index', { title: 'Note App', time: (new Date()).toLocaleString(), user: req?.user });
 });
+
+router.get("/notes", checkLogin, (req, res, next) => {
+  if (!req?.user) {
+    res.redirect("/notes")
+  }
+  res.render("notes", {user: req?.user})
+})
 
 module.exports = router;
