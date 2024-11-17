@@ -1,5 +1,7 @@
 {
-  "engines": {"node": "16.x"},
+  "engines": {
+    "node": "16.x"
+  },
   "name": "glitch-test-app",
   "version": "0.0.0",
   "private": true,
@@ -18,7 +20,8 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "sanitize-html": "^2.13.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

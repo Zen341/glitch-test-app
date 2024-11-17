@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes</title>
@@ -12,9 +13,16 @@
 <body>
     <div class="d-flex flex-column w-100">
         <%- include("partials/header", {user}) %>
-        <div class="d-flex flex-row w-100 flex-grow-1 h-100">
-            <%- include("partials/sidebar") %>
-        </div>
+            <div>
+                <%- include("partials/sidebar", {notes}) %>
+            </div>
+            <div class="position-absolute bottom-0 end-0 m-5">
+                <div class="d-grid gap-2">
+                    <a type="button" name="new-note-button" id="new-note-button" class="btn btn-primary rounded" href="/notes/create">
+                        New
+                    </a>
+                </div>
+            </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

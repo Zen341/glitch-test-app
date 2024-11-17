@@ -4,6 +4,9 @@ const NotesSchema = new mongoose.Schema({
     id: {
         type: Number
     },
+    iduser: {
+        type: Number
+    },
     title: {
         type: String,
         default: ""
