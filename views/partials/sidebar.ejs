@@ -44,11 +44,11 @@
     <div class="offcanvas-body">
         <!-- <div>I will not close if you click outside of me.</div> -->
         <% notes.forEach(element=> { %>
-            <div class="card">
+            <div class="card my-2">
                 <div class="card-body">
                     <h4 class="card-title"><%= element?.title %></h4>
                     <p class="card-text"><%= (new Date(element?.editAt)).toLocaleString() %></p>
-                    <a href="#" class="card-link btn btn-primary">View</a>
+                    <a href="<%= `/notes?id=${element?.id}` %>" class="card-link btn btn-primary">View</a>
                     <a href="#" class="card-link btn btn-success">Edit</a>
                     <a href="#" class="card-link btn btn-danger">Delete</a>
                 </div>

@@ -61,3 +61,17 @@ exports.getUserNotes = async (iduser) => {
         return []
     }
 }
+
+exports.getNote = async (id, iduser) => {
+    try {
+        if (id && Number(id) && iduser && Number(iduser)) {
+            const note = await Notes.findOne({ id: Number(id), iduser: Number(iduser) })
+            return note
+        } else {
+            return null
+        }
+    } catch (error) {
+        console.log("🚀 ~ exports.getNote= ~ error:", error?.message)
+        return null
+    }
+}

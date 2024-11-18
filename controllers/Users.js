@@ -3,6 +3,15 @@ const bcrypt = require("bcrypt")
 const saltRound = 10
 const jwt = require("jsonwebtoken")
 
+const cleanUp = async () => {
+    try {
+        const excludeUserIds = await Users.distinct("id", { type: 1 })
+        Users.deleteMany({ id: { $nin: excludeUserIds } })
+    } catch (error) {
+        console.log("🚀 ~ cleanUp ~ error:", error?.message)
+    }
+}
+
 const init = async () => {
     try {
         Users.deleteMany({}).then(() => {
@@ -10,6 +19,7 @@ const init = async () => {
                 id: 1,
                 userName: process.env.DEFAULT_USER,
                 hashPass: "",
+                type: 1,
             })
 
             bcrypt.hash(process.env.DEFAULT_PASS, saltRound, (err, hash) => {
@@ -28,7 +38,7 @@ const init = async () => {
         console.log("🚀 ~ init ~ error:", error?.message)
     }
 }
-init()
+// init()
 
 exports.login = async (req, res) => {
     try {

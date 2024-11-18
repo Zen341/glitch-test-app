@@ -25,3 +25,17 @@ const appendAlert = (message, type = "info") => {
         alert.close()
     }, 3000);
 }
+
+const adjustMainContentHeight = () => {
+    const margin = 20
+    const navBarHeight = document.getElementById("navBarContainer").offsetHeight
+    const mainContentContainer = document.getElementById("mainContentContainer")
+    if (mainContentContainer) {
+        mainContentContainer.style.maxHeight = `calc(100vh - ${navBarHeight}px - ${margin * 2}px)`
+        mainContentContainer.style.marginTop = `${margin}px`
+        mainContentContainer.style.marginBottom = `${margin}px`
+    }
+}
+
+window.addEventListener("load", adjustMainContentHeight)
+window.addEventListener("resize", adjustMainContentHeight)
