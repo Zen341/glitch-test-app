@@ -9,6 +9,10 @@ const UsersSchema = new mongoose.Schema({
     },
     hashPass: {
         type: String
+    },
+    type: { // for now: 0 - any (delete), 1 - keep
+        type: Number,
+        default: 0
     }
 }, {
     versionKey: false,
